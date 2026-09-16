@@ -16,7 +16,6 @@ onMounted(async () => {
 
 <template>
   <main>
-    <h1>Testing</h1>
     <h1>Pemrograman Web 2</h1>
     <h2>Status Backend</h2>
     <p>{{ apiStatus }}</p>
