@@ -10,6 +10,10 @@ Route::get('/tickets/{ticket}', [TicketController::class, 'show'])
     ->whereNumber('ticket')
     ->name('tickets.show');
 
+
+
 Route::get('/api/tickets/{ticket}', [TicketController::class, 'showJson'])
     ->whereNumber('ticket')
     ->name('tickets.show-json');
+
+// "{{ route('tickets.show', ['ticket' => 1]) }}"
