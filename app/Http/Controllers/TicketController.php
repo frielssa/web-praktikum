@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-
 
 class TicketController extends Controller
 {
@@ -19,15 +18,17 @@ class TicketController extends Controller
         ];
     }
 
+    public function index(): View
+    {
+        return view('tickets.index', [
+            // Panggil fungsi $this->tickets() menggunakan tanda kurung ()
+            'tickets' => array_values($this->tickets())
+        ]);
+    }
 
-public function index(): View
-{
-    return view('tickets.index', ['tickets' => $this->tickets()]);
-}
-
-public function show(int $ticket): View
+    public function show(int $ticket): View
     { 
-        $item = this->findTicket($ticket);
+        $item = $this->findTicket($ticket);
         return view('tickets.show', ['ticket' => $item]);
     }
 

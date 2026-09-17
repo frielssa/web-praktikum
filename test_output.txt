@@ -1,0 +1,5 @@
+﻿INDEX ERROR: The remote server returned an error: (500) Internal Server Error.
+SHOW ERROR: The remote server returned an error: (500) Internal Server Error.
+JSON ERROR: The remote server returned an error: (500) Internal Server Error.
+NONNUMERIC STATUS: 404
+NOTFOUND STATUS: 500
