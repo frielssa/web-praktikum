@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
+use App\Models\Ticket;
 
 class TicketController extends Controller
 {
@@ -20,10 +21,12 @@ class TicketController extends Controller
 
     public function index(): View
     {
-        return view('tickets.index', [
-            // Panggil fungsi $this->tickets() menggunakan tanda kurung ()
-            'tickets' => array_values($this->tickets())
-        ]);
+
+        $tickets = Ticket::with(['user', 'category'])
+            ->orderByDesc('id')
+            ->paginate(10);
+
+        return view('tickets.index', compact('tickets'));
     }
 
     public function show(int $ticket): View
