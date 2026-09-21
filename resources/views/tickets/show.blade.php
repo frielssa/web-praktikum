@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Tiket - {{ $ticket['subject'] }}</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; }
-        .card { border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 400px; }
-        a { text-decoration: none; color: #0066cc; display: inline-block; margin-top: 15px; }
-    </style>
-</head>
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><title>Detail tiket</title></head>
 <body>
-    <div class="card">
-        <h1>{{ $ticket['subject'] }}</h1>
-        <p><strong>ID Tiket:</strong> {{ $ticket['id'] }}</p>
-        <p><strong>Status:</strong> {{ $ticket['status'] }}</p>
-
-        <a href="{{ route('tickets.index') }}">&larr; Kembali ke Daftar Tiket</a>
-    </div>
-</body>
-</html>
+@include('tickets._messages')
+<h1>#{{ $ticket->id }} — {{ $ticket->subject }}</h1>
+<p>{{ $ticket->description }}</p>
+<p>Kategori: {{ $ticket->category->name }}</p>
+<p>Pemilik: {{ $ticket->user->name }}</p>
+<p>Status: {{ $ticket->status }}; urgent: {{ $ticket->is_urgent ? 'Ya' : 'Tidak' }}</p>
+<a href="{{ route('tickets.edit', $ticket) }}">Edit</a>
+<form method="POST" action="{{ route('tickets.destroy', $ticket) }}"
+        onsubmit="return confirm('Hapus tiket beserta komentarnya?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Hapus</button>
+</form>
+<h2>Komentar</h2>
+@forelse ($ticket->comments as $comment)
+    <p>{{ $comment->user->name }}: {{ $comment->body }}</p>
+@empty
+    <p>Belum ada komentar.</p>
+@endforelse
+<a href="{{ route('tickets.index') }}">Daftar tiket</a>
+</body></html>
