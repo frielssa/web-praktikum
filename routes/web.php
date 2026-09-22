@@ -1,23 +1,15 @@
 <?php
 
-use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
-// Daftar tiket (HTML)
-Route::get('/tickets', [TicketController::class, 'index'])
-    ->name('tickets.index');
+// Rute web/HTML lama dinonaktifkan karena sudah dipindah ke API v1 (routes/api.php)
+// Route::get('/tickets/{ticket}', [TicketController::class, 'show'])
+//     ->whereNumber('ticket')
+//     ->name('tickets.show');
 
-// Detail tiket (HTML) dengan parameter {ticket} dibatasi hanya angka
-Route::get('/tickets/{ticket}', [TicketController::class, 'show'])
-    ->whereNumber('ticket')
-    ->name('tickets.show');
+// Route::get('/api/tickets/{ticket}', [TicketController::class, 'showJson'])
+//     ->whereNumber('ticket')
+//     ->name('tickets.show-json');
 
-// Detail tiket (JSON) dengan parameter {ticket} dibatasi hanya angka
-Route::get('/api/tickets/{ticket}', [TicketController::class, 'showJson'])
-    ->whereNumber('ticket')
-    ->name('tickets.show-json');
-
-Route::pattern('ticket', '[0-9]+');
-Route::resource('tickets', TicketController::class);
-
-// "{{ route('tickets.show', ['ticket' => 1]) }}"
+// Route::pattern('ticket', '[0-9]+');
+// Route::resource('tickets', TicketController::class);
