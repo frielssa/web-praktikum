@@ -1,15 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionController;
 
-// Rute web/HTML lama dinonaktifkan karena sudah dipindah ke API v1 (routes/api.php)
-// Route::get('/tickets/{ticket}', [TicketController::class, 'show'])
-//     ->whereNumber('ticket')
-//     ->name('tickets.show');
+// Route Autentikasi Session Cookie SPA
+Route::post('/login', [SessionController::class, 'login'])
+    ->middleware('throttle:api-login')
+    ->name('login');
 
-// Route::get('/api/tickets/{ticket}', [TicketController::class, 'showJson'])
-//     ->whereNumber('ticket')
-//     ->name('tickets.show-json');
-
-// Route::pattern('ticket', '[0-9]+');
-// Route::resource('tickets', TicketController::class);
+Route::post('/logout', [SessionController::class, 'logout'])
+    ->middleware('auth:web')
+    ->name('logout');

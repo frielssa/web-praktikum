@@ -15,5 +15,10 @@
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1"
+    },
+    "dependencies": {
+        "axios": "^1.20.0",
+        "pinia": "^3.0.4",
+        "vue-router": "^4.6.4"
     }
 }

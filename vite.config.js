@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
 import tailwindcss from '@tailwindcss/vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
@@ -14,9 +15,12 @@ export default defineConfig({
                 }),
             ],
         }),
+        vue(), // Pastikan plugin vue diikutsertakan di sini
         tailwindcss(),
     ],
     server: {
+        port: 5173,
+        strictPort: true, // Berhenti jika port 5173 terpakai agar tidak otomatis pindah ke 5174
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
